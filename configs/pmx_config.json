@@ -1,16 +1,16 @@
 {
-    "exp_dir": "/media/nvme_data/gas_results/tutorial",
-    "dataset": "mnist",
-    "mode": "george",
+    "exp_dir": "/media/nvme_data/gas_results/pmx",
+    "dataset": "pmx",
+    "mode": "erm",
     "allow_multigpu": true,
     "seed": 0,
     "classification_config": {
-        "model": "shallow_cnn",
+        "model": "resnet50",
         "checkpoint_metric": "val_acc",
         "optimizer_config": {
             "class_args": {
-                "lr": 0.005,
-                "weight_decay": 1e-4
+                "lr": 0.0001,
+                "weight_decay": 0.0001
             },
             "class_name": "Adam"
         },
@@ -20,8 +20,8 @@
             "loss",
             "acc"
         ],
-        "num_epochs": 20,
-        "batch_size": 128,
+        "num_epochs": 15,
+        "batch_size": 32,
         "scheduler_config": {
             "class_args": {
                 "milestones": [
@@ -39,8 +39,7 @@
             "criterion_config": {}
         },
         "dataset_config": {
-            "subsample_8": false,
-            "resize": false
+            "seed": 0
         }
     },
     "reduction_config": {

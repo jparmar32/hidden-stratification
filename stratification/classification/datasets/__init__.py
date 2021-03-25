@@ -3,3 +3,4 @@ from .celebA import CelebADataset
 from .isic import ISICDataset
 from .waterbirds import WaterbirdsDataset
 from .mnist import MNISTDataset
+from .pmx import PmxDataset
