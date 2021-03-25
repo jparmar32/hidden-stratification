@@ -29,6 +29,8 @@ from stratification.cluster.george_reduce import GEORGEReducer
 from stratification.cluster.george_cluster import GEORGECluster
 from stratification.cluster.utils import get_k_from_model
 
+import pdb
+
 
 class GEORGEHarness:
     """Training harness for the GEORGE algorithm.
@@ -52,7 +54,8 @@ class GEORGEHarness:
         ):
             self.exp_dir = config["activations_dir"]
         else:
-            self.exp_dir = os.path.join(config["exp_dir"], "run_" + get_unique_str())
+            # self.exp_dir = os.path.join(config["exp_dir"], "run_" + get_unique_str())
+            self.exp_dir = config["exp_dir"]
             os.makedirs(self.exp_dir, exist_ok=True)
         self.log_format = log_format
         self.logger = init_logger("harness", self.exp_dir, log_format=log_format)
@@ -169,7 +172,9 @@ class GEORGEHarness:
         if classification_config["eval_only"] or classification_config["save_act_only"]:
             save_dir = self.exp_dir
         else:
-            save_dir = os.path.join(self.exp_dir, f"{mode}_{get_unique_str()}")
+            # save_dir = os.path.join(self.exp_dir, f"{mode}_{get_unique_str()}")
+            seed = classification_config["dataset_config"]["seed"]
+            save_dir = os.path.join(self.exp_dir, f"{mode}/seed_{seed}")
             self._save_config(save_dir, classification_config)
         robust = self._get_robust_status(mode)
 

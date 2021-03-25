@@ -486,7 +486,7 @@ class GEORGEClassification:
                         rob_auroc = min(paired_aurocs)
                     metrics[f"{key}_rob_auroc"] = rob_auroc
                 if not has_alt_subclass:
-                    metrics[alt_subclass_rob_auroc] = auroc
+                    metrics["alt_subclass_rob_auroc"] = auroc
                 PROGRESS_BAR_STR += (
                     " | AUROC: {auroc:.4f} | R AUROC: {subclass_rob_auroc:.4f} | "
                     "TR AUROC: {true_subclass_rob_auroc:.4f} | AR AUROC: {alt_subclass_rob_auroc:.4f}"

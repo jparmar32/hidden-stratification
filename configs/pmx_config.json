@@ -3,10 +3,10 @@
     "dataset": "pmx",
     "mode": "erm",
     "allow_multigpu": true,
-    "seed": 0,
+    "seed": 101,
     "classification_config": {
         "model": "resnet50",
-        "checkpoint_metric": "val_acc",
+        "checkpoint_metric": "val_auroc",
         "optimizer_config": {
             "class_args": {
                 "lr": 0.0001,
@@ -18,7 +18,8 @@
         "eval_only": false,
         "metric_types": [
             "loss",
-            "acc"
+            "acc",
+            "auroc"
         ],
         "num_epochs": 15,
         "batch_size": 32,
@@ -39,7 +40,7 @@
             "criterion_config": {}
         },
         "dataset_config": {
-            "seed": 0
+            "seed": 101
         }
     },
     "reduction_config": {
