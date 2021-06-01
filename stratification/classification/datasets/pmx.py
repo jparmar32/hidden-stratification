@@ -68,22 +68,24 @@ class PmxDataset(GEORGEDataset):
             else:
                 file_markers = file_markers_val
 
-            true_subclass_labels = np.array(
-                [
-                    int(
-                        "chest tube"
-                        in cxr_tube_dict[fm[0].split("/")[-1].split(".dcm")[0]]
-                    )
-                    for fm in file_markers
-                ]
-            )
-
         elif self.split == "test":
             file_markers_dir = os.path.join(file_dir, "test_list.pkl")
             with open(file_markers_dir, "rb") as fp:
                 file_markers = pickle.load(fp)
 
-            true_subclass_labels = np.random.randint(0, 2, size=len(file_markers))
+            # filter out for ones with tube label
+            file_markers = [
+                fm
+                for fm in file_markers
+                if fm[0].split("/")[-1].split(".dcm")[0] in cxr_tube_dict
+            ]
+
+        true_subclass_labels = np.array(
+            [
+                int(cxr_tube_dict[fm[0].split("/")[-1].split(".dcm")[0]])
+                for fm in file_markers
+            ]
+        )
 
         print(f"{len(file_markers)} files in {self.split} split...")
 

@@ -6,7 +6,7 @@
     "seed": 101,
     "classification_config": {
         "model": "resnet50",
-        "checkpoint_metric": "val_auroc",
+        "checkpoint_metric": "val_acc",
         "optimizer_config": {
             "class_args": {
                 "lr": 0.0001,
@@ -21,7 +21,7 @@
             "acc",
             "auroc"
         ],
-        "num_epochs": 15,
+        "num_epochs": 30,
         "batch_size": 32,
         "scheduler_config": {
             "class_args": {
@@ -33,7 +33,7 @@
             "class_name": "MultiStepLR"
         },
         "gdro_config": {
-            "checkpoint_metric": "val_subclass_rob_acc",
+            "checkpoint_metric": "val_true_subclass_rob_acc",
             "optimizer_config": {
                 "class_args": {}
             },
