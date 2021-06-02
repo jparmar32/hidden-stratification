@@ -82,12 +82,15 @@ class PmxDataset(GEORGEDataset):
                 if fm[0].split("/")[-1].split(".dcm")[0] in cxr_tube_dict
             ]
 
-        true_subclass_labels = np.array(
-            [
-                int(cxr_tube_dict[fm[0].split("/")[-1].split(".dcm")[0]])
-                for fm in file_markers
-            ]
-        )
+        true_subclass_labels = []
+        tube_label_dict = {(0,0): 0, (0,1): 1, (1,0): 2, (1,1):3}
+        for fm in file_markers:
+            tube = int(cxr_tube_dict[fm[0].split("/")[-1].split(".dcm")[0]])
+            label = int(fm[1])
+
+            true_subclass_labels.append(tube_label_dict[(label,tube)])
+        
+        true_subclass_labels = np.array(true_subclass_labels)
 
         print(f"{len(file_markers)} files in {self.split} split...")
 
