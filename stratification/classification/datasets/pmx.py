@@ -28,12 +28,14 @@ class PmxDataset(GEORGEDataset):
     ):
         self.seed = seed
         transform = transform = get_transform()
-        super().__init__("Pmx", root, split, transform=transform)
+        super().__init__("pneumothorax/dicom_images/", root, split, transform=transform)
+
+
 
     def _check_exists(self):
         """Checks whether or not the CXR filemarkers exist."""
         return os.path.isfile(
-            "/home/ksaab/Documents/observational/file_markers/cxr/trainval_list_gold.pkl"
+            "/home/jsparmar/gaze-robustness/filemarkers/cxr_p/trainval_list.pkl"
         )
 
     def _download(self):
@@ -42,15 +44,15 @@ class PmxDataset(GEORGEDataset):
 
     def _load_samples(self):
         """ Loads Pneumothorax dataset """
-        file_dir = "/home/ksaab/Documents/observational/file_markers/cxr"
+        file_dir = "/home/jsparmar/gaze-robustness/filemarkers/cxr_p"
         # load tube annotations
         with open(
-            "/home/ksaab/Documents/observational/cxr_tube_dict.pkl", "rb"
+            "/media/pneumothorax/cxr_tube_dict.pkl", "rb"
         ) as pkl_f:
             cxr_tube_dict = pickle.load(pkl_f)
 
         if self.split in ["train", "val"]:
-            file_markers_dir = os.path.join(file_dir, "trainval_list_gold.pkl")
+            file_markers_dir = os.path.join(file_dir, "trainval_list.pkl")
             with open(file_markers_dir, "rb") as fp:
                 file_markers = pickle.load(fp)
 
@@ -69,7 +71,7 @@ class PmxDataset(GEORGEDataset):
                 file_markers = file_markers_val
 
         elif self.split == "test":
-            file_markers_dir = os.path.join(file_dir, "test_list.pkl")
+            file_markers_dir = os.path.join(file_dir, "test_list_tube.pkl")
             with open(file_markers_dir, "rb") as fp:
                 file_markers = pickle.load(fp)
 

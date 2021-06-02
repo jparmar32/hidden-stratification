@@ -401,7 +401,7 @@ class GEORGEHarness:
             }
             if split == "train":
                 dataset = dataset_class(
-                    root="./data",
+                    root="/media",
                     split=split,
                     download=True,
                     augment=True,
@@ -423,7 +423,7 @@ class GEORGEHarness:
             else:
                 # Evaluation dataloaders (including for the training set) are "clean" - no data augmentation or shuffling
                 dataset = dataset_class(
-                    root="./data", split=key, **config["dataset_config"]
+                    root="/media", split=key, **config["dataset_config"]
                 )
                 dataset.add_subclass_labels(split_subclass_labels, seed=seed)
                 dataloaders[split] = DataLoader(
