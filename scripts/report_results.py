@@ -8,9 +8,9 @@ test_set = 'cxr_p'
 results_dir = f'/mnt/gaze_robustness_results/gdro/cxr_p/true_subclass_gdro'
 
 seeds = [x for x in range(10)] 
-wds = [10, 1, .1, .01, .001, .0001]
+wds = [ 1, .1]
 
-
+'''
 
 best_subclass_acc = 0.0
 best_wd = 0
@@ -39,7 +39,11 @@ avg_acc_means = []
 subclass_acc_means = []
 
 #do overall as well as subclass
-results_dir = f'/mnt/gaze_robustness_results/gdro/cxr_p/wd_{best_wd}/true_subclass_gdro'
+results_dir = f'/mnt/gaze_robustness_results/gdro/cxr_p/wd_{best_wd}/true_subclass_gdro'''
+
+results_dir = f'/mnt/gaze_robustness_results/gdro/cxr_p/true_subclass_gdro'
+avg_acc_means = []
+subclass_acc_means = []
 
 for cv in seeds:
     res_file = os.path.join(results_dir, f"seed_{cv}/metrics.json")
